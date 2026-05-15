@@ -25,7 +25,24 @@
       "Bash(rm -rf \".claude/skills/.tmp-markdown-to-docx\")",
       "Bash(unzip -l \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/slides.zip\")",
       "Bash(git restore *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(unzip -l \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/skill存储/deep-reporter.zip\")",
+      "Bash(unzip \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/skill存储/deep-reporter.zip\" -d \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills\")",
+      "Skill(skill-creator)",
+      "Skill(skill-creator:*)",
+      "Bash(mkdir -p \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter/evals\")",
+      "Bash(mkdir -p \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/iteration-1/github-overview\" \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/iteration-1/dev-onboarding\" \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/iteration-1/code-backed-chinese-report\")",
+      "Bash(mkdir -p \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/repos\" \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/iteration-1/github-overview/with_skill/outputs\" \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/iteration-1/github-overview/without_skill/outputs\" \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/iteration-1/dev-onboarding/with_skill/outputs\" \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/iteration-1/dev-onboarding/without_skill/outputs\" \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/iteration-1/code-backed-chinese-report/with_skill/outputs\" \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/iteration-1/code-backed-chinese-report/without_skill/outputs\" && if [ ! -d \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/repos/computerraria/.git\" ]; then git clone --depth 1 \"https://github.com/misprit7/computerraria.git\" \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/repos/computerraria\"; fi)",
+      "Bash(mkdir -p \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/test-sources\")",
+      "Bash(rm -rf \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/test-sources/computerraria-main\")",
+      "Bash(unzip -q \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/项目/computerraria-main.zip\" -d \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/test-sources\")",
+      "Bash(npx skills *)",
+      "Bash(gh auth *)"
+    ],
+    "additionalDirectories": [
+      "G:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\project-reporter",
+      "G:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\project-reporter-workspace\\iteration-1",
+      "G:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\project-reporter-workspace"
     ]
   }
 }
