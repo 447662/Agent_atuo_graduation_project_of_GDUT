@@ -39,12 +39,44 @@
       "Bash(npx skills *)",
       "Bash(gh auth *)",
       "Bash(git pull *)",
-      "Bash(git config *)"
+      "Bash(git config *)",
+      "Bash(mkdir -p \".claude/skills/project-reporter/evals\")",
+      "Bash(mkdir -p \"test/project-reporter/iteration-1/current-project-folder/with_skill/outputs\" \"test/project-reporter/iteration-1/current-project-folder/without_skill/outputs\")",
+      "Skill(docx)",
+      "Skill(docx:*)",
+      "Bash(pandoc \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/模板/格式规范.docx\" -t markdown)",
+      "Bash(mkdir -p \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/thesis-writer\" \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/thesis-writer/evals\")",
+      "Bash(gh repo *)",
+      "WebFetch(domain:github.com)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(curl -L --retry 3 --connect-timeout 20 -o \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/gs-skills.zip\" \"https://github.com/cookjohn/gs-skills/archive/refs/heads/main.zip\")",
+      "Bash(python -m zipfile -e \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/gs-skills.zip\" \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills\")",
+      "Bash(python -m zipfile -e \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/skill存储/cnki-skills-master.zip\" \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills\")",
+      "Bash(python -m zipfile -e \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/skill存储/gs-skills-master.zip\" \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills\")",
+      "Bash(cp -r \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/cnki-skills-master/skills/\"* \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/\")",
+      "Bash(cp -r \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/gs-skills-master/skills/\"* \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/\")",
+      "Bash(python \"C:/Users/Dell/.claude/skills/skill-creator/eval-viewer/generate_review.py\" \"test/project-reporter/iteration-1\" --skill-name \"project-reporter\" --benchmark \"test/project-reporter/iteration-1/benchmark.json\" --static \"test/project-reporter/iteration-1/review.html\")",
+      "Bash(PYTHONUTF8=1 python \"C:/Users/Dell/.claude/skills/skill-creator/eval-viewer/generate_review.py\" \"test/project-reporter/iteration-1\" --skill-name \"project-reporter\" --benchmark \"test/project-reporter/iteration-1/benchmark.json\" --static \"test/project-reporter/iteration-1/review.html\")",
+      "Bash(mkdir -p \".claude/skills/AIGC_down/evals\")",
+      "Bash(python -)",
+      "Skill(pdf)",
+      "Skill(pdf:*)",
+      "Bash(pandoc \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/verilog-i2c-thesis.md\" -o \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/verilog-i2c-thesis.pdf\" --pdf-engine=xelatex -V CJKmainfont=\"SimSun\" -V geometry:a4paper -V geometry:margin=25mm)",
+      "Bash(pandoc \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/模板/毕业论文模板.docx\" -t markdown)",
+      "Bash(mkdir -p \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/thesis-md-to-docx/evals\")",
+      "Bash(pandoc --version)",
+      "Bash(pandoc \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/verilog-i2c-thesis.md\" -o \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/verilog-i2c-thesis.docx\" --reference-doc=\"g:/My_code/Agent_atuo_graduation_project_of_GDUT/模板/毕业论文模板.docx\" --resource-path=\"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test:g:/My_code/Agent_atuo_graduation_project_of_GDUT\")",
+      "Bash(python \"test/aigc_down_revise.py\")"
     ],
     "additionalDirectories": [
       "G:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\project-reporter",
       "G:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\project-reporter-workspace\\iteration-1",
-      "G:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\project-reporter-workspace"
+      "G:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\project-reporter-workspace",
+      "G:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\test\\project-reporter\\iteration-1\\current-project-folder\\with_skill",
+      "g:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills",
+      "g:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\AIGC_down",
+      "g:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\thesis-md-to-docx"
     ]
   }
 }
