@@ -38,7 +38,8 @@
       "Bash(unzip -q \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/项目/computerraria-main.zip\" -d \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/project-reporter-workspace/test-sources\")",
       "Bash(npx skills *)",
       "Bash(gh auth *)",
-      "Bash(git pull *)"
+      "Bash(git pull *)",
+      "Bash(git config *)"
     ],
     "additionalDirectories": [
       "G:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\project-reporter",
