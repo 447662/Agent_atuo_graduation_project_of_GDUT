@@ -17,7 +17,15 @@
       "Bash(mv \".claude/skills/officecli\" \".claude/skills/_officecli_repo\")",
       "Bash(cp -R __TRACKED_VAR__/.claude/skills/_anthropics_skills_repo/skills/* __TRACKED_VAR__/.claude/skills/)",
       "Bash(cp -R \".claude/skills/_officecli_repo/skills/\"* \".claude/skills/\")",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(unzip -l \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/markdown-to-docx-skill.zip\")",
+      "Bash(rm -rf \".claude/skills/markdown-to-docx\")",
+      "Bash(unzip -q \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/markdown-to-docx-skill.zip\" \"markdown-to-docx-skill-open-source-20260424-184756/markdown-to-docx/*\" -d \".claude/skills/.tmp-markdown-to-docx\")",
+      "Bash(mv \".claude/skills/.tmp-markdown-to-docx/markdown-to-docx-skill-open-source-20260424-184756/markdown-to-docx\" \".claude/skills/markdown-to-docx\")",
+      "Bash(rm -rf \".claude/skills/.tmp-markdown-to-docx\")",
+      "Bash(unzip -l \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/slides.zip\")",
+      "Bash(git restore *)",
+      "Bash(git commit *)"
     ]
   }
 }
