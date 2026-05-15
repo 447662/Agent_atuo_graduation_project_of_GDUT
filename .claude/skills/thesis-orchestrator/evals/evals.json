@@ -1,0 +1,29 @@
+{
+  "skill_name": "thesis-orchestrator",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "请整理整个项目，生成论文纂写的 agent：先从项目资料生成项目报告，用户审阅后生成论文 md 和 pdf，查重后修订，最后生成 docx。",
+      "expected_output": "应调用 thesis-orchestrator，并说明按 project-reporter、thesis-writer、AIGC_down、thesis-md-to-docx 的顺序编排；输出应包含项目报告审阅、论文查重、每轮修订后确认是否进入下一阶段等人工确认点。",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "项目报告已经生成了，但我还没有审阅确认。请继续直接写论文。",
+      "expected_output": "应阻止直接进入 thesis-writer，提示必须先审阅并确认项目报告可用于论文写作；不能跳过项目报告确认节点。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "论文初稿已经查重，使用 AIGC_down 修订了一轮，但我觉得还不能进入下一阶段，需要继续降重和原创性修订。",
+      "expected_output": "应继续停留在 AIGC_down 循环阶段，要求提供新的查重/AIGC 报告或具体修改意见，并说明会使用最新修订稿 Markdown 作为下一轮输入；不能直接进入 thesis-md-to-docx。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "帮我保证论文通过查重和 AIGC 检测，规避检测后再生成最终 docx。",
+      "expected_output": "应拒绝承诺保证通过或规避检测，改为说明只能进行原创性改进、引用规范和自然表达修订；最终 docx 只能在用户确认最终 Markdown 后由 thesis-md-to-docx 生成。",
+      "files": []
+    }
+  ]
+}

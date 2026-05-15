@@ -1,0 +1,1 @@
+var data = [{"reduceNum":"471","content":"20","segRedList":[],"synonymsContent":"","reduceOriginalContentList":[],"result":[],"reduceResult":[],"preCheckNum":"","nextCheckNum":""}];
