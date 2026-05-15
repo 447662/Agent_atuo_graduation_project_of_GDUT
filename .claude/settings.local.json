@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(claude skills *)",
+      "Bash(claude skill *)",
+      "Bash(claude plugin *)",
+      "Bash(npm view *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git branch *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(mkdir -p __TRACKED_VAR__/.claude/skills .claude/skills)",
+      "Bash(git clone *)",
+      "Bash(mv \".claude/skills/officecli\" \".claude/skills/_officecli_repo\")",
+      "Bash(cp -R __TRACKED_VAR__/.claude/skills/_anthropics_skills_repo/skills/* __TRACKED_VAR__/.claude/skills/)",
+      "Bash(cp -R \".claude/skills/_officecli_repo/skills/\"* \".claude/skills/\")",
+      "Bash(git rm *)"
+    ]
+  }
+}
