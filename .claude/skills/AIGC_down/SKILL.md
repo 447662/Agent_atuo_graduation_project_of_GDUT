@@ -69,14 +69,17 @@ When highlighted text in the report does not exactly match the thesis because of
 
 For each high-repeat passage:
 
-1. Extract the key points, logic, and conclusion from the original passage.
-2. Compress the meaning into a short internal outline.
-3. Rewrite from that outline into a new paragraph with roughly similar length.
-4. Change sentence order, explanation path, and connective structure where it helps readability.
-5. Keep professional terms, equations, citations, names, and factual claims accurate.
-6. Add or preserve citations when the idea clearly depends on a source.
+1. Split the target content by natural paragraphs and process one natural paragraph at a time.
+2. Do not rewrite an entire section, chapter, or multi-paragraph block in one pass.
+3. Keep each single rewrite unit under 500 Chinese characters; if a natural paragraph exceeds 500 Chinese characters, split it at sentence boundaries into smaller units before rewriting.
+4. Extract the key points, logic, and conclusion from the current paragraph or sub-paragraph unit.
+5. Compress the meaning into a short internal outline.
+6. Rewrite from that outline into a new paragraph with roughly similar length.
+7. Change sentence order, explanation path, and connective structure where it helps readability.
+8. Keep professional terms, equations, citations, names, and factual claims accurate.
+9. Add or preserve citations when the idea clearly depends on a source.
 
-The point is not to swap synonyms mechanically. Reconstruct the explanation from the underlying meaning so the paragraph becomes more original and easier to read.
+The point is not to swap synonyms mechanically. Reconstruct the explanation from the underlying meaning so the paragraph becomes more original and easier to read. Paragraph-by-paragraph rewriting keeps the thesis structure stable and reduces the chance of accidentally changing meaning across sections.
 
 ### 4. Revise AIGC-flagged passages second
 
@@ -91,6 +94,8 @@ Before revising AIGC-flagged passages, ask whether the user wants to provide a c
 
 When applying style guidance:
 
+- Process AI-flagged content one natural paragraph at a time; do not rewrite all flagged sections or a long multi-paragraph block in a single pass.
+- Keep each single rewrite unit under 500 Chinese characters; if a paragraph exceeds 500 Chinese characters, split it at sentence boundaries first.
 - Keep the thesis tone formal enough for undergraduate academic writing.
 - Prefer clear, plain Chinese over exaggerated or promotional language.
 - Avoid adding meaningless filler just to change detector behavior.
@@ -101,9 +106,10 @@ When applying style guidance:
 
 If a passage is both high-repeat and AIGC-flagged:
 
-1. Apply the similarity rewrite first using key-point reconstruction.
-2. Then lightly revise the result for natural academic style.
-3. Re-check that terminology, citations, and meaning are still preserved.
+1. Split the passage into natural paragraphs and rewrite one paragraph at a time, keeping each single rewrite unit under 500 Chinese characters.
+2. Apply the similarity rewrite first using key-point reconstruction.
+3. Then lightly revise the result for natural academic style.
+4. Re-check that terminology, citations, and meaning are still preserved.
 
 ### 6. Generate the revised Markdown and PDF files
 

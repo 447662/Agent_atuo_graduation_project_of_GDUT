@@ -67,7 +67,15 @@
       "Bash(mkdir -p \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/thesis-md-to-docx/evals\")",
       "Bash(pandoc --version)",
       "Bash(pandoc \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/verilog-i2c-thesis.md\" -o \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/verilog-i2c-thesis.docx\" --reference-doc=\"g:/My_code/Agent_atuo_graduation_project_of_GDUT/模板/毕业论文模板.docx\" --resource-path=\"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test:g:/My_code/Agent_atuo_graduation_project_of_GDUT\")",
-      "Bash(python \"test/aigc_down_revise.py\")"
+      "Bash(python \"test/aigc_down_revise.py\")",
+      "Bash(xelatex --version)",
+      "Bash(pandoc \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/test/verilog-i2c-thesis_AIGC_down.md\" -f markdown+tex_math_dollars -t latex --wrap=none -o \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/verilog-i2c-thesis_AIGC_down_body.tex\")",
+      "Bash(pandoc \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/verilog-i2c-thesis_AIGC_down_shifted.md\" -f markdown+tex_math_dollars -t latex --wrap=none -o \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/verilog-i2c-thesis_AIGC_down_body_shifted.tex\")",
+      "Bash(pandoc \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/verilog-i2c-thesis_AIGC_down_shifted.md\" -f markdown+tex_math_dollars -t latex --wrap=none -o \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/verilog-i2c-thesis_AIGC_down_body_shifted.tex\")",
+      "Bash(xelatex -interaction=nonstopmode -halt-on-error -output-directory \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex\" \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/verilog-i2c-thesis_AIGC_down.tex\")",
+      "Bash(xelatex -interaction=nonstopmode -halt-on-error \"verilog-i2c-thesis_AIGC_down.tex\")",
+      "Bash(pandoc \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/verilog-i2c-thesis_AIGC_down_shifted.md\" -f markdown+tex_math_dollars -t latex --wrap=none --no-highlight -o \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/verilog-i2c-thesis_AIGC_down_body_shifted.tex\")",
+      "Bash(git status *)"
     ],
     "additionalDirectories": [
       "G:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\project-reporter",

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(/.claude/skills/thesis-md-to-tex/**)",
+      "Edit(/.claude/skills/thesis-orchestrator/**)",
+      "Bash(python -m json.tool \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/thesis-md-to-tex/evals/evals.json\")",
+      "Bash(python -m json.tool \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/.claude/skills/thesis-orchestrator/evals/evals.json\")"
+    ]
+  }
+}

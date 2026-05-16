@@ -1,0 +1,257 @@
+% 广东工业大学本科生毕业设计(论文)LaTeX模板
+% 根据《广东工业大学本科生毕业设计(论文)格式规范》制作
+
+\documentclass[12pt,a4paper]{article}
+\usepackage[UTF8]{ctex} % 中文支持
+\usepackage{times} % 使用Times New Roman字体
+\usepackage{geometry} % 页面设置
+\usepackage{titlesec} % 标题格式设置
+\usepackage{fancyhdr} % 页眉页脚设置
+\usepackage{setspace} % 行距设置
+\usepackage{graphicx} % 图片支持
+\usepackage{amsmath} % 数学公式
+\usepackage{amssymb} % 数学符号
+\usepackage{booktabs} % 表格美化
+\usepackage{array} % 表格支持
+\usepackage{multirow} % 表格合并
+\usepackage{longtable} % 长表格
+\usepackage{cite} % 参考文献引用
+\usepackage{enumitem} % 列表环境设置
+\usepackage{indentfirst} % 首行缩进
+\usepackage{float} % 浮动体控制
+\usepackage{caption} % 图表标题
+\usepackage{subcaption} % 子图
+\usepackage{hyperref} % 超链接
+\usepackage{pdfpages} % 插入PDF封面
+
+% 页面设置
+\geometry{
+    top=30mm,
+    bottom=25mm,
+    left=30mm,
+    right=20mm
+}
+
+% 行距设置：1.5倍行距
+\onehalfspacing
+
+% 字体设置
+\setmainfont{Times New Roman}
+\setCJKmainfont{SimSun} % 宋体
+\setCJKfamilyfont{hei}{SimHei} % 黑体
+\newcommand{\hei}{\CJKfamily{hei}}
+
+% 字号定义
+\newcommand{\erhao}{\zihao{2}}
+\newcommand{\sanhao}{\zihao{3}}
+\newcommand{\sihao}{\zihao{4}}
+\newcommand{\xiaosi}{\zihao{-4}}
+\newcommand{\xiaowu}{\zihao{-5}}
+
+% 表格注释命令
+\newcommand{\note}[1]{\par\vspace{0.5em}\noindent\small #1}
+
+% 标题格式设置
+\titleformat{\section}{\centering\hei\bfseries\sanhao}{\thesection}{1em}{}
+\titleformat{\subsection}{\hei\bfseries\sihao}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\hei\bfseries\xiaosi}{\thesubsubsection}{1em}{}
+
+% 段落格式
+\setlength{\parindent}{2em} % 首行缩进2字符
+\setlength{\parskip}{0pt} % 段间距为0
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\xiaowu\thepage} % 页码位于页脚右侧，小五号
+\renewcommand{\headrulewidth}{0pt} % 去掉页眉横线
+
+% 封面设置
+\newcommand{\makecover}{
+    \includepdf[pages=-]{论文封面.pdf}
+}
+
+% 中英文摘要环境
+\newenvironment{abstractcn}{
+    \begin{center}
+        \hei\bfseries\sanhao 摘要
+    \end{center}
+    \addcontentsline{toc}{section}{摘要}
+}{\par}
+
+\newenvironment{abstracten}{
+    \begin{center}
+        \textbf{\sanhao Abstract}
+    \end{center}
+    \addcontentsline{toc}{section}{Abstract}
+}{\par}
+
+% 关键词命令
+\newcommand{\keywords}[1]{
+    \vspace{\baselineskip}
+    {\hei\bfseries\sihao 关键词：} #1
+}
+
+\newcommand{\keywordsen}[1]{
+    \vspace{\baselineskip}
+    {\textbf{\sihao Keywords:}} #1
+}
+
+% 目录格式设置
+\usepackage[titles]{tocloft}
+\renewcommand{\cftsecfont}{\hei\bfseries\xiaosi} % 一级标题小四黑体
+\renewcommand{\cftsubsecfont}{\songti\xiaosi} % 二级标题小四宋体
+\renewcommand{\cftsubsubsecfont}{\songti\xiaosi} % 三级标题小四宋体
+
+\begin{document}
+
+% 封面
+\makecover
+
+% 中英文摘要页（不编页码）
+\pagenumbering{gobble}
+
+% 中文摘要
+\begin{abstractcn}
+    本文是广东工业大学本科生毕业设计（论文）的LaTeX模板。根据学校格式规范要求，中文摘要应包含研究目的、方法、结果和结论等要素，字数在400字左右。摘要应具有独立性和自含性，即不阅读论文的全文，就能获得必要的信息。
+
+    摘要内容应说明研究工作目的、实验方法、结果和最终结论等，重点是结果和结论。中文摘要字数不宜过多，一般不超过500字。
+\end{abstractcn}
+\keywords{关键词1, 关键词2, 关键词3, 关键词4, 关键词5}
+
+\clearpage
+
+% 英文摘要
+\begin{abstracten}
+    This is a LaTeX template for undergraduate graduation design (thesis) of Guangdong University of Technology. According to the university's format specifications, the English abstract should include research purpose, methods, results, and conclusions, with a word count of around 400 words.
+
+    The abstract should have independence and self-containedness, meaning that necessary information can be obtained without reading the full text of the paper. The content should explain the research purpose, experimental methods, results, and final conclusions, with emphasis on results and conclusions.
+\end{abstracten}
+\keywordsen{Keyword1, Keyword2, Keyword3, Keyword4, Keyword5}
+
+\clearpage
+
+% 目录
+\tableofcontents
+\clearpage
+
+% 正文开始（从绪论开始编页码）
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% 绪论
+\section{绪论}
+\label{sec:introduction}
+
+\subsection{研究背景与意义}
+毕业设计（论文）是本科生培养过程中的重要环节，是检验学生综合运用所学知识解决实际问题能力的重要手段。本文基于广东工业大学的相关格式规范，开发了相应的LaTeX模板。
+
+\subsection{国内外研究现状}
+目前，国内外高校普遍采用专业的排版系统进行学术论文的撰写。LaTeX作为一种高质量的文档准备系统，在学术界得到广泛应用。
+
+\subsection{研究内容与目标}
+本文的主要研究内容包括：
+\begin{enumerate}[label=\arabic*.,leftmargin=2em]
+    \item 分析广东工业大学毕业设计（论文）格式要求
+    \item 设计并实现相应的LaTeX模板
+    \item 验证模板的适用性和易用性
+\end{enumerate}
+
+% 正文主体
+\section{正文主体}
+\label{sec:mainbody}
+
+\subsection{问题描述与研究方法}
+本研究采用系统工程的方法，将格式要求分解为各个具体的排版元素，逐一实现。
+
+\subsubsection{基本前提与假设}
+\begin{itemize}[leftmargin=2em]
+    \item 学生具备基本的LaTeX使用能力
+    \item 模板应具有良好的可扩展性
+    \item 格式规范相对稳定
+\end{itemize}
+
+\subsection{实现方案}
+模板的实现基于article文档类，通过各类宏包实现特定的格式要求。
+
+% 公式示例
+\subsection{公式示例}
+\label{subsec:formula}
+
+根据牛顿第二定律，物体的加速度与作用力成正比，与质量成反比：
+\begin{equation}
+    F = ma
+    \label{eq:newton}
+\end{equation}
+
+其中，$F$表示作用力，$m$表示质量，$a$表示加速度。
+
+% 表格示例
+\subsection{表格示例}
+\label{subsec:table}
+
+\begin{table}[H]
+    \centering
+    \caption{示例表格}
+    \label{tab:sample}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        项目 & 数据1 & 数据2 & 数据3 \\
+        \hline
+        样本A & 10.5 & 20.3 & 15.6 \\
+        \hline
+        样本B & 12.3 & 18.7 & 14.2 \\
+        \hline
+        样本C & 9.8 & 22.1 & 16.8 \\
+        \hline
+    \end{tabular}
+    \note{注：表中数据为模拟数据，仅供参考。}
+\end{table}
+
+% 图片示例
+\subsection{图片示例}
+\label{subsec:figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{example-image}
+    \caption{示例图片}
+    \label{fig:sample}
+\end{figure}
+
+% 结论
+\section{结论}
+\label{sec:conclusion}
+
+\subsection{研究成果总结}
+本文成功开发了符合广东工业大学格式要求的LaTeX模板，具有以下特点：
+\begin{itemize}[leftmargin=2em]
+    \item 符合学校规定的页面设置和字体要求
+    \item 实现了中英文摘要、目录、正文等标准结构
+    \item 提供了公式、表格、图片等元素的规范格式
+\end{itemize}
+
+\subsection{存在的问题与展望}
+尽管本模板已经满足了基本的格式要求，但仍有一些细节需要进一步完善。未来可以考虑增加更多专业相关的模板样式。
+
+% 参考文献
+\phantomsection
+\addcontentsline{toc}{section}{参考文献}
+\bibliographystyle{unsrt}
+\nocite{*}
+\bibliography{references}
+
+% 致谢
+\section*{致谢}
+\addcontentsline{toc}{section}{致谢}
+
+在本文完成之际，衷心感谢指导老师的悉心指导和同学们的热情帮助。同时感谢广东工业大学提供的良好学习环境。
+
+% 附录
+\appendix
+\section{附录A}
+\label{app:A}
+
+这里是附录内容，可以包括详细的推导过程、程序代码等。
+
+\end{document}
