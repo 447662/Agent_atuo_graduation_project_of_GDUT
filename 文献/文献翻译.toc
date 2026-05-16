@@ -1,0 +1,21 @@
+\contentsline {section}{\numberline {1}外文文献译文（1）}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}译文信息}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}翻译正文}{1}{subsection.1.2}%
+\contentsline {paragraph}{UART 的工作原理}{2}{paragraph*.1}%
+\contentsline {paragraph}{UART 的结构}{2}{paragraph*.2}%
+\contentsline {paragraph}{UART 的特点}{3}{paragraph*.3}%
+\contentsline {paragraph}{SPI 的工作原理}{3}{paragraph*.4}%
+\contentsline {paragraph}{SPI 的结构}{4}{paragraph*.5}%
+\contentsline {paragraph}{补充说明}{4}{paragraph*.6}%
+\contentsline {paragraph}{I2C 的工作原理}{5}{paragraph*.7}%
+\contentsline {paragraph}{I2C 的结构}{5}{paragraph*.8}%
+\contentsline {paragraph}{I2C 的不足}{5}{paragraph*.9}%
+\contentsline {section}{\numberline {2}外文文献原文（1）}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}文献原文}{7}{subsection.2.1}%
+\contentsline {paragraph}{Abstract}{7}{paragraph*.10}%
+\contentsline {paragraph}{INTRODUCTION}{7}{paragraph*.11}%
+\contentsline {paragraph}{UART}{8}{paragraph*.12}%
+\contentsline {paragraph}{SPI}{9}{paragraph*.13}%
+\contentsline {paragraph}{I2C}{11}{paragraph*.14}%
+\contentsline {paragraph}{COMPARISON}{13}{paragraph*.15}%
+\contentsline {paragraph}{CONCLUSION}{13}{paragraph*.16}%

@@ -1,0 +1,757 @@
+% 广东工业大学本科生毕业设计(论文)LaTeX模板
+% 根据《广东工业大学本科生毕业设计(论文)格式规范》制作
+
+\documentclass[12pt,a4paper]{article}
+\usepackage[UTF8]{ctex} % 中文支持
+% 字体选择：仅在 XeLaTeX 或 LuaLaTeX 下使用 fontspec
+\usepackage{ifxetex,ifluatex}
+\ifnum\ifxetex1\else0\fi=1
+    \usepackage{fontspec}
+\else
+    \ifnum\ifluatex1\else0\fi=1
+        \usepackage{fontspec}
+    \else
+        \usepackage{times} % 对于 pdfLaTeX 保持传统字体设置
+    \fi
+\fi
+\usepackage{geometry} % 页面设置
+\usepackage{circuitikz} % 电路图支持
+\usepackage{titlesec} % 标题格式设置
+\usepackage{fancyhdr} % 页眉页脚设置
+\usepackage{setspace} % 行距设置
+\usepackage{graphicx} % 图片支持
+\usepackage{amsmath} % 数学公式
+\usepackage{amssymb} % 数学符号
+\usepackage{booktabs} % 表格美化
+\usepackage{array} % 表格支持
+\usepackage{multirow} % 表格合并
+\usepackage{longtable} % 长表格
+\usepackage{cite} % 参考文献引用
+\usepackage{enumitem} % 列表环境设置
+\usepackage{indentfirst} % 首行缩进
+\usepackage{float} % 浮动体控制
+\usepackage{caption} % 图表标题
+\usepackage{subcaption} % 子图
+\usepackage{hyperref} % 超链接
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, calc, backgrounds, fit, shapes.misc, shapes.geometric} % TikZ 库
+% 引用显示为方括号内的上标（整体上标），在 hyperref 之后定义为稳健命令
+\makeatletter
+\DeclareRobustCommand{\brsupcite}[1]{\textsuperscript{[\citen{#1}]}}
+\makeatother
+\let\oldcite\cite
+\renewcommand{\cite}[1]{\brsupcite{#1}}
+\usepackage{pdfpages} % 插入PDF封面
+\usepackage{listings} % 代码块支持
+\usepackage{xcolor} % 代码高亮支持
+\usepackage{titlesec}
+\titleclass{\subsubsubsection}{straight}[\subsubsection]
+
+% 设置格式
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+% 设置编号
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+% 代码块设置
+\lstset{
+    language=Verilog,
+    basicstyle=\ttfamily\scriptsize,
+    keywordstyle=\color{blue}\bfseries,
+    stringstyle=\color{red},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    frame=single,
+    framesep=5pt,
+    breaklines=true,
+    breakatwhitespace=false,
+    tabsize=2,
+    showstringspaces=false,
+    captionpos=b,
+    abovecaptionskip=10pt,
+    belowcaptionskip=10pt
+}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+% 页面设置
+\geometry{
+    top=30mm,
+    bottom=25mm,
+    left=30mm,
+    right=20mm
+}
+
+% 公式编号格式：按章节顺序标注，如 4-1, 2-2
+\numberwithin{equation}{section}
+\renewcommand{\theequation}{\thesection-\arabic{equation}}
+
+% 行距设置：1.5倍行距
+\onehalfspacing
+
+% 字体设置（为确保 \textbf 生效，显式设置粗体字体）
+% 字体设置（若使用 XeLaTeX/LuaLaTeX 则设定 fontspec 字体）
+\ifnum\ifxetex1\else0\fi=1
+    \setmainfont{Times New Roman}[BoldFont={Times New Roman}, ItalicFont={Times New Roman Italic}]
+    \setCJKmainfont[BoldFont={SimHei}]{SimSun} % 宋体，粗体使用 SimHei
+    \setCJKfamilyfont{hei}{SimHei} % 黑体
+\else
+    % pdfLaTeX: 保持默认字体设置，\textbf 在常规字体下可用
+\fi
+\newcommand{\hei}{\CJKfamily{hei}}
+
+% 字号定义
+\newcommand{\erhao}{\zihao{2}}
+\newcommand{\sanhao}{\zihao{3}}
+\newcommand{\sihao}{\zihao{4}}
+\newcommand{\xiaosi}{\zihao{-4}}
+\newcommand{\xiaowu}{\zihao{-5}}
+
+% 表格注释命令
+\newcommand{\note}[1]{\par\vspace{0.5em}\noindent\small #1}
+
+% 表格和图像按章节编号设置
+\renewcommand{\thetable}{\thesection.\arabic{table}}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+
+% 每章开始时重置表格和图像计数器
+\makeatletter
+\@addtoreset{table}{section}
+\@addtoreset{figure}{section}
+\makeatother
+
+% 表格标题格式设置：五号黑体加粗，表序与表名之间空一格
+\captionsetup[table]{
+  font={bf, small},
+  labelfont={bf, small},
+  labelsep=space,
+  justification=centering
+}
+
+% 图像标题格式设置：五号宋体，图号与图名之间空一格
+\captionsetup[figure]{
+  font={small},
+  labelfont={bf, small},
+  labelsep=space,
+  justification=centering
+}
+
+% 标题格式设置
+\titleformat{\section}{\centering\hei\bfseries\sanhao}{\thesection}{1em}{}
+\titleformat{\subsection}{\hei\bfseries\sihao}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\hei\bfseries\xiaosi}{\thesubsubsection}{1em}{}
+\titleformat{\subsubsubsection}{\hei\bfseries\xiaosi}{\thesubsubsubsection}{1em}{}
+
+% 增加标题深度支持
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+
+% 段落格式
+\setlength{\parindent}{2em} % 首行缩进2字符
+\setlength{\parskip}{0pt} % 段间距为0
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\xiaowu\thepage} % 页码位于页脚右侧，小五号
+\renewcommand{\headrulewidth}{0pt} % 去掉页眉横线
+
+% 封面设置
+% 封面设置（仅当封面文件存在时插入，避免编译因找不到文件失败）
+\newcommand{\makecover}{%
+      \IfFileExists{论文封面.pdf}{\includepdf[pages=-]{论文封面.pdf}}{}%
+}
+
+% 中英文摘要环境
+\newenvironment{abstractcn}{
+    \begin{center}
+        \hei\bfseries\sanhao 摘要
+    \end{center}
+    \addcontentsline{toc}{section}{摘要}
+}{\par}
+
+\newenvironment{abstracten}{
+    \begin{center}
+        \textbf{\sanhao Abstract}
+    \end{center}
+    \addcontentsline{toc}{section}{Abstract}
+}{\par}
+
+% 关键词命令
+\newcommand{\keywords}[1]{
+    \vspace{\baselineskip}
+    {\hei\bfseries\sihao 关键词：} #1
+}
+
+\newcommand{\keywordsen}[1]{
+    \vspace{\baselineskip}
+    {\textbf{\sihao Keywords:}} #1
+}
+
+% 目录格式设置
+\usepackage[titles]{tocloft}
+\renewcommand{\cftsecfont}{\hei\bfseries\xiaosi} % 一级标题小四黑体
+\renewcommand{\cftsubsecfont}{\songti\xiaosi} % 二级标题小四宋体
+\renewcommand{\cftsubsubsecfont}{\songti\xiaosi} % 三级标题小四宋体
+% 文献翻译元信息
+\title{外文文献翻译}
+\author{请填写姓名}
+\date{请填写日期}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{}{}
+
+
+\begin{document}
+
+% 文献翻译封面：仅插入第 1 页，避免多页封面 PDF 的异常页导致编译失败。
+\IfFileExists{g:/My_code/Agent_atuo_graduation_project_of_GDUT/模板/文献翻译封面.pdf}{\includepdf[pages=1]{g:/My_code/Agent_atuo_graduation_project_of_GDUT/模板/文献翻译封面.pdf}}{}
+
+\pagenumbering{gobble}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+\section{外文文献译文（1）}
+\subsection{译文信息}
+\begin{itemize}
+\item 外文题名：Analysis and Comparison of UART, SPI and I2C
+\item 中文译名：UART、SPI 与 I2C 的分析与比较
+\item 作者：未在原文中明确给出
+\item 来源/期刊/会议/出版社：未在原文中明确给出
+\item 年份：未在原文中明确给出
+\item DOI 或 URL：未在原文中明确给出
+\end{itemize}
+
+\subsection{翻译正文}
+\subsubsection*{摘要}
+
+当前可选的硬件通信协议较多，其中 UART、SPI 和 I2C 是最具代表性的三类协议，并且已经得到广泛应用。它们各自具有不同特点，因此如何根据实际需求选择合适协议，长期以来都是设计人员需要面对的问题。本文分别介绍三种协议的组成方式、工作原理以及优缺点。通过比较三者的传输距离可以发现，目前 SPI 协议在特定条件下能够支持更长距离传输；在传输速率方面，SPI 协议具有更高速度，但受到较多限制条件约束；UART 的性能较为稳定；SPI 还提供多种传输模式可供选择。在传输功耗方面，UART 具有明显优势，优于另外两种协议。本文希望从设计目标出发，为协议选择提供一种新的思考方式，并由此形成观察协议选型的新视角。
+
+关键词：UART，SPI，I2C
+
+\subsubsection*{引言}
+
+目前存在多种通信协议，每种协议都有自身的优点和不足，在不同应用场景下，硬件传输协议的选择也会有所差异。本文讨论的主题是如何选择合适的协议。下文将讨论当前使用较广泛的几种通信协议，并分析多种协议的特性，从而判断哪些协议在特定场景下更合适、更具优势。UART 是一种常用的硬件通信协议，只需要两条数据线即可完成双向数据传输，并且不需要时钟信号进行同步操作。它以数据包形式传输数据，每个数据包的数据长度可以变化。为了保证数据传输过程中的安全性和完整性，数据包中可以加入校验位。发送端和接收端通过比特率实现同步，因此两个工作频率不同的设备也能够通信。
+
+SPI 协议是一种速度较快的传输协议，允许主设备以较高频率与从设备通信。SPI 协议只允许存在一个主设备，但可以连接多个从设备。主设备负责产生用于与从设备同步的时钟信号。SPI 在芯片中通常只占用四根线，能够节省引脚资源，也有利于节省 PCB 布局空间。I2C 协议是一种两线串行总线，只需要串行数据线和串行时钟线两根双向信号线。总线接口可以集成在芯片内部，从而优化空间和成本。它支持多主设备和多从设备，但同一时刻只允许一个主设备控制总线。连接到 I2C 总线上的设备数量主要受总线最大电容限制。I2C 具有低功耗和较强抗干扰能力等特点。通过理解上述协议的工作原理与特点，可以在特定工作环境或一般工作环境中得到更合适的方案，例如面向低功耗场景、长距离传输需求或高速传输需求进行协议选择。本文旨在为协议搭配和选择提供新的建议。
+
+\subsubsection*{UART}
+
+通用异步收发传输器（Universal Asynchronous Receiver/Transmitter，UART）是一种异步串行通信协议，也是最常用的硬件间通信协议之一。当前，UART 已应用于多种场景，例如各类环境传感器、无线通信模块等。
+
+\paragraph{UART 的工作原理}
+
+UART 是一种串行通信协议，不同于并行通信，其传输数据不会在同一时刻全部到达接收端，而是通过一条数据线逐位发送给接收端。这意味着它的传输速率可能低于并行传输协议。发送端的 TX 引脚直接连接接收端的 RX 引脚。数据在 UART 与控制设备之间以并行方式传递，控制设备可以是微控制器或微处理器。当通过 TX 引脚发送数据时，发送端 UART 需要将并行信息转换为串行数据并发送给接收端。接收端接收该数据后再转换回并行形式，并与其控制器通信。
+
+UART 区别于其他通信协议的另一个特点是，发送端和接收端并不通过时钟信号同步，而是以相同波特率实现同步。波特率用每秒传输的比特数表示，单位为 bps，常见取值为 9600 或 115200。
+
+\paragraph{UART 的结构}
+
+UART 传输的数据以数据包形式组织。每个数据包包含 1 个起始位、5 至 9 个数据位、1 个奇偶校验位（可选择是否使用），以及 1 个、2 个或 1/2 个停止位。
+
+起始位：当数据线空闲时，UART 协议处于高电平状态。当数据传输开始时，发送端会在一个时钟周期内将传输线电平由高变低。起始位被添加在实际数据之前。接收端检测到数据线从高到低的变化后，开始接收实际数据。
+
+数据位：数据位是发送端与接收端之间实际传输的数据。数据长度可以为 5 至 9 位。特别地，不使用奇偶校验位时可以得到 9 位数据长度。多数情况下，最大数据长度为 8 位。
+
+奇偶校验位：奇偶校验位可以帮助接收端检查传输过程中数据是否发生改变。数据位可能因为多种错误而改变，例如接收溢出导致数据丢失，或者接收端接收了大量数据但无法一次处理。未完成的 UART 传输会造成数据丢失，也可能与发送后进入休眠、接收设备断电等情况有关。接收端读取数据后，会统计数据中 1 的个数，并判断总数为奇数还是偶数。如果校验位为 0，表示数据包中 1 的个数为偶数；如果校验位为 1，表示数据包中 1 的个数为奇数。
+
+停止位：顾名思义，停止位用于标记数据包的结束。通常停止位占用 1 个或 2 个时钟周期，也可以设置为 1/2 个时钟周期。当停止位结束后，数据线进入空闲状态，其电平回到高电平。
+
+\paragraph{UART 的特点}
+
+与其他硬件通信协议不同，UART 只需要两条数据线即可完成全双工数据传输，而 SPI 协议至少需要四条数据线互连。UART 也不需要时钟线或其他时间信号来完成两个设备之间的通信。由于存在奇偶校验位，基本的数据传输准确性可以得到保证。UART 具有广泛的硬件应用和多种使用场景。该协议还具有良好的功耗表现，有助于绿色通信技术的发展，并已在 Artix-7 等平台中得到验证。
+
+UART 的不足主要包括以下几点：单个数据包的最大传输长度限制为 9 位；与并行传输相比，UART 的传输速率较低；UART 协议不是总线通信协议，不能同时与多个设备通信，同一时刻只能进行一对一通信。与 SPI 协议中一个主机可连接多个从机、I2C 协议中可存在多个主机和多个从机不同，UART 通信的两个设备之间波特率差异通常不应超过 10%。
+
+\subsubsection*{SPI}
+
+SPI 是串行外设接口（Serial Peripheral Interface）的缩写。它是一种全双工、高速同步通信总线，通常只使用芯片上的四个引脚，因此能够节省芯片引脚、释放空间并简化 PCB 布局。由于该协议使用较为简单，越来越多的芯片开始集成这种通信协议，例如 AT91RM9200。其工作原理如原文图 1 所示。
+
+SPI 工作在主从模式下。从设备通常可以是 EPROM、Flash、AD/DA、音视频处理芯片或其他器件，而主机通常是 FPGA、MCU 或 DSP 等可编程控制器。SPI 主要由 SCLK、CS、MOSI 和 MISO 等信号线组成。SCK、SS、SDI 和 SDO 等名称也具有相同含义。当存在多个从设备时，CS 用于选择需要控制的从设备。
+
+\paragraph{SPI 的工作原理}
+
+一般情况下，器件的工作模式是固定的，主机需要采用相同工作模式。控制器通常指 SPI 设备中的控制寄存器，可以通过配置控制寄存器设置 SPI 总线的传输模式，使双方能够正常通信。
+
+当 SPI 空闲时，时钟信号的极性 CPOL 表示时钟处于高电平还是低电平。当器件未使用且 CPOL 设为 1 时，SCK 引脚上的时钟信号为高电平；当 CPOL 设为 0 时，情况相反，即 SCK 空闲时为低电平。CPOL=0 表示 SCK 未使用时为 0，CPOL=1 表示 SCK 未使用时为 1。
+
+CPHA 表示时钟相位，用于指定 SPI 设备是在 SCK 引脚时钟信号跳变到上升沿还是下降沿时开始采样数据。如果 CPHA 设为 1，时钟信号的上升沿和下降沿会分别使 SPI 设备采样数据和传输数据。当 CPHA 设为 0 时，情况相反。CPHA=0 表示输入和输出数据在 SCK 的第一个边沿有效；CPHA=1 表示输入和输出数据在 SCK 的第二个边沿有效。在四种模式中，模式 0 和模式 3 使用最广，大多数 SPI 设备都支持这两种模式。
+
+\paragraph{SPI 的结构}
+
+默认情况下，讨论 SPI 时通常指传统的四线 Motorola SPI 协议，它总共有四条数据线：SCLK、MOSI、MISO 和 CS。典型四线系统的优点是能够实现全双工数据传输。一个 SPI 接口只能有一个主机，但可以有一个或多个从机。只有一个主机和一个从设备时需要一条 CS 线，而多个从设备则需要多条 CS 线。MOSI 和 MISO 是数据线，其中 MOSI 用于主机向从机发送数据，MISO 用于从机向主机发送数据。SCLK 是时钟信号。主机输出、从机输入、主机数据 MISO、主机输入、从机输出、CS 从设备选择以及低电平有效等信号共同构成 SPI 通信，SPI 速率由时钟频率决定。连接示意图如原文图 2 所示。
+
+根据不同应用场景，三线 SPI 主要有两种类型。对于部分通信外设，其只有三条 SPI 总线，即一条 CS、一条 CLK 和一条 MOSI/MISO，这意味着数据输入与输出共用同一条数据线。此时仅存在 SCLK、SDIO 和 CS 三根线，SDIO 是用于半双工通信的双向端口。例如，ADI 的许多 ADC 芯片支持双向传输。双向端口在作为输入使用时，应由 FPGA 设置为高阻态 Z。
+
+\paragraph{补充说明}
+
+SPI 总线具有若干特殊特性，不仅限于其高频通信速度，还包括菊花链连接方式，这些特性说明 SPI 是一种具有优势的通信协议。
+
+第一，不同的连接结构。SPI 有两种连接方式。第一种是传统的独立从机结构，每个从机都需要自己的 CS 线。当主机希望与某个从机通信时，会拉低对应 CS 信号线，同时保持其他 CS 信号线为高电平。由于未被选中的从机的 MISO 引脚与其他从机共用同一信号线，因此这些从机的 MISO 引脚必须配置为高阻输出。
+
+第二种连接方式是菊花链配置。菊花链是指信号线从一个设备串行传输到下一个设备，直到数据到达目标设备。
+
+菊花链的主要缺点是，如果某个从机发生单点故障，则优先级低于该设备的从机可能会断开。距离主机更远的从机，其服务优先级也会更低。如有必要，应对后续优先级和从机线路检测器进行配置。
+
+为了避免单点故障导致整个链路失效，应在从机服务器超时时快速响应。
+
+在菊花链模式下，每个从机会在下一个时钟周期将输入数据复制到输出端，从而充分利用 SPI 移位寄存器。差异比较图如原文图 3 所示。
+
+第二，传输速率。与 I2C 的标准模式 100K、快速模式 400K 和高速模式 3.4M 不同，SPI 协议没有固定速率。SPI 的最大时钟频率、CPU 解析 SPI 数据的能力以及输出端驱动能力共同决定 SPI 传输速率，且最大信号传输速率还应遵循 PCB 布局要求。
+
+\subsubsection*{I2C}
+
+I2C 总线也可称为 IIC 或 Inter-Integrated Circuit。该名称中的数字 2 更接近平方式写法，而不是普通数字 2。I2C 是 Philips Semiconductor 于 1982 年提出的一种同步、多控制器、多目标串行通信总线。这种串行通信总线最重要的特点是，可以用两根线连接多个设备，且设备有机会在主设备和从设备角色之间转换。此外，开发者还可以选择不同通信模式。I2C 用于在嵌入式系统中连接微控制器、EEPROM、I/O 接口以及其他外设。例如，Arduino 与气压传感器之间的连接就是 I2C 总线的典型应用。ADC 和 DAC 芯片可以将模拟数据转换为数字 I2C 信号，从而保持数值稳定和准确。
+
+\paragraph{I2C 的工作原理}
+
+I2C 使用 SCL 和 SDA 两根线连接多个设备，它们分别称为串行时钟线和串行数据线。每个设备拥有一个 7 位地址码。根据 i2c-bus.org 的说明，7 位宽度理论上允许 128 个 I2C 地址，但由于某些原因，其中一些地址具有特殊用途，例如 0000000 0、0000000 1、0000001 X、0000010 X、0000011 X、00001XX X、11110XX X 和 11111XX X，这些均以二进制形式表示，并与 10 位地址相关。
+
+I2C 仿真和概念基于方波振荡，其中没有考虑电磁干扰或其他干扰因素。通过在 SCL 和 SDA 线上使用电容，可以降低和滤除波形噪声。然而，电容特性和充电周期会受到电容大小影响。因此，选择合适电容值非常重要，因为时钟线和数据线必须达到逻辑高电压，否则信息将无法被识别。根据 Texas Instruments 的建议，I2C 总线上每个设备使用的电容在标准模式和快速模式下应遵循 400 pF 的限制，在 Fast Mode Plus 下规定为 550 pF。相关波形如原文图 4 所示。
+
+\paragraph{I2C 的结构}
+
+当 I2C 总线空闲时，SCL 和 SDA 两条线均保持高电平。当设备准备传输数据时，SDA 会切换为低电平并开始通过 SDA 线传输数据，时钟线则向各个设备提供时钟信息。当设备准备停止传输数据时，SDA 会在 SCL 为高电平时由低电平切换为高电平。
+
+在写数据时，设备首先向总线发送停止信号，以降低写入失败的情况；随后发送复位信号和起始信号。接着发送 7 位地址，从设备会返回反馈信号。之后开始传输 8 位数据，并在每个周期从从设备获得反馈信号。结束时，向 I2C 总线发送停止信号，并释放总线进入空闲状态。
+
+\paragraph{I2C 的不足}
+
+由于多种原因，I2C 不适合用于长距离通信。虽然存在一些方法可以解决位翻转问题，但来自 PCB 或导线的寄生电容属于物理缺陷，难以完全消除。如果导线材料较差，寄生电容和导线电阻的波动会进一步影响 I2C 总线稳定性。如果电阻过大，主设备将无法解析从设备数据，从而引发一系列可靠性问题。
+
+\subsubsection*{比较}
+
+前面章节介绍了三种协议的工作原理和特点，本章从单一方向对它们进行比较。在传输距离方面，三种协议各自都有长度限制。UART 协议的一般传输距离为 15 m；但在基于 RS-485 的设计中，可以实现 100 m 的长距离传输。SPI 协议通常属于短距离传输协议，但在特殊设计环境下可实现超过 1200 m 的传输距离。I2C 是短距离传输协议，在不使用中继器的情况下，其传输距离约为 200 mm 至 300 mm。从上述传输特性可以看出，在应用环境需要长距离传输时，可以考虑使用 SPI 协议。
+
+UART 协议在不同标准和不同传输速率下工作，其在 RS-232 标准下的传输速率为 20 Kbps。在 RS-422 标准下，传输速率可以达到 10 Mbps。同时，传输距离越长，最大传输速率越小。I2C 协议在不同模式下具有不同最大传输速率，其在标准模式下最高为 100 Kbps，在超快速模式下最高可达 5 Mbps。SPI 协议的传输速率最高可达 50 Mbps，但其最大传输速率受三个条件限制：系统时钟频率、CPU 处理 SPI 数据的能力以及 PCB 允许的最大信号传输速率。如果设计需要高速传输，SPI 协议的高传输速率是一种选择；如果设计要求连接简单和布局简洁，I2C 可以满足需求；如果设计目标是节能，则 UART 是最佳选择，其功耗为 0.0135 W，明显低于另外两种协议。
+
+\subsubsection*{结论}
+
+在本研究中，通过学习 UART 的工作原理、格式描述和特性可以发现，UART 的传输速率可能低于某些并行协议，发送端和接收端不依赖其他介质进行同步，并以数据包形式完成传输。最重要的是，UART 数据传输只需要两条数据线，并且是全双工系统。虽然它只能进行一对一通信，但也可以通过多个从机实现一对多的应用形式。
+
+随后，本文从多个方面分析 SPI 协议，并得出结论：SPI 作为一种全双工高速通信线路，可以简化布局，主机也可以自行改变控制器。四线结构是全双工，而三线结构只是半双工。它可以配置主传输模式，速率也会不断变化。菊花链连接无疑是一种较好的应用方式，但其缺点是容易导致单点故障。
+
+最后，本文回顾了 I2C 的相关文献并形成了认识。I2C 可以用两根线连接多个设备，其特性可以发生变化，并且能够在一定程度上降低波形噪声。与此同时，I2C 对导线材料要求较高，因为导线材料会影响总线稳定性，过大的电阻也会影响服务器数据解析。
+
+
+\clearpage
+\section{外文文献原文（1）}
+\subsection{文献原文}
+\subsubsection*{Analysis and Comparison of UART, SPI and I2C}
+
+\paragraph{Abstract}
+
+Nowadays there are many hardware communications protocols to choose
+from, UART, SPI, I2C three protocols are the most representative, they
+are widely used. They have different characteristics, and how to choose
+the right choice is a problem that has been bothering people for a long
+time. In this article, the composition of the three protocols, how they
+work, and their advantages or disadvantages are described separately.
+And through the comparison of their transmission distance, it will be
+found that today\textbackslash{}'s SPI protocol can transmit a longer distance, in the
+comparison of transmission rates SPI protocol has a faster rate but many
+limited conditions, UART has a more stable performance, SPI has a
+variety of transmission modes to choose from. In terms of transmission
+power consumption, UART has a huge advantage, outperforming the other
+two protocols. Through the article, we hope to provide a new way of
+thinking from the purpose required for the design. This leads to a new
+perspective on protocol selection
+
+Keywords：UART, SPI, I2C
+
+\paragraph{INTRODUCTION}
+
+Various communication protocols are available nowadays, each protocol
+has its own advantages and disadvantages, and the choice of hardware
+transmission protocol is also different in different situations. The
+topic to be covered in this post is how to pick a suitable protocol. The
+following article discusses a few of the most well-liked communication
+protocols now in use and examines numerous protocols\textbackslash{}' properties to
+determine which are preferable and superior. UART is a widely used
+hardware communication protocol that requires only two data lines to
+complete bidirectional data transmission and does not require
+
+clock signals for synchronous operation. It transfers data in packets,
+each with a variable size of data. A check digit can be included in the
+package to guarantee security and integrity during data transmission.
+Synchronization between the transmitter and receiver is achieved by bit
+rate, which allows two devices operating at different frequencies to
+communicate. The SPI protocol is a very fast transmission protocol that
+allows the master to communicate with the slave at a higher frequency.
+The SPI protocol allows only one master to exist, but multiple slaves
+can exist. The master is responsible for generating a clock signal that
+is used to synchronize with its slave. The SPI saves pins by occupying
+only 4 wires in the chip, which also benefits saving PCB layout space.
+The I2C protocol is a two-wire serial bus that requires only two
+bidirectional lines, a serial data line, and a serial clock line. The
+bus interface is formed within the chip, optimizing space and cost. It
+supports multi-master and multi-slave devices, but only one host is
+allowed at a time. The number of I2C protocols connected to the bus is
+limited only by the maximum capacitance of the bus. It is characterized
+by low power consumption and strong antiinterference ability. Through
+the working principle and characteristics of the above protocols, we get
+a better solution in the specific working environment or the general
+working environment and provide new solutions for the application of the
+protocol in different scenarios, in the pursuit of lowpower environment
+solutions or the choice of long-distance transmission, or the pursuit of
+excellent choices under highspeed transmission. The entire article aims
+to offer fresh suggestions for protocol collocation and selection.
+
+\paragraph{UART}
+
+Universal Asynchronous Receiver/Transmitter is an Asynchronous serial
+communication protocol. It is one of the most widely used
+hardware-to-hardware communication protocols. Nowadays UART has been
+used in many applications such as various types of environmental
+sensors, wireless communication modules, and so on.
+
+A.  Working principle of UART
+
+UART is a serial communication protocol, that differsfrom parallel
+communication, transmissions in that the transmitted data does not reach
+the receiver at the same time. It is transmitted bit by bit to the
+receiver via a data line. This means that its transfer rate may be
+slower than the transfer rate of the parallel transfer protocol. The
+transmitter's TX pin is directly connected with the receiver's RX pin.
+Data travels to and from a UART in parallel to the control device, such
+as microcontrollers and microprocessors. When sending on the TX pin, the
+transmitter's UART needsto translate parallel information into serial
+and transmit it to the receiver. The receiver receives this data and
+translates it back to parallel, then communicate with its controller.
+Another feature that distinguishes UART from other communication
+protocols is that the transmitter and receiver are not synchronized
+through the clock signal. Instead, the transmitter and receiver
+synchronize with each other at the same baud rate. The baud rate is
+expressed in bits per second or bps, it is usually 9600 or 115200.
+
+B.  Structure of the UART
+
+    UART transmitted data is organized into packets. Each packet
+    contains 1 start bit, 5 to 9 data bits, a parity bit (ability to
+    choose whether to use or not), 1 or 2 or 1/2 stop bits.
+
+    START BIT: The UART protocol is in a high-level state when the data
+    line is idle. When data transfer starts, the transmitter will change
+    the level of the transmission line from high to low for one clock.
+    It is added before the actual data. The receiver detects this change
+    from high to low on the data line and starts receiving the actual
+    data.
+
+    DATA BITS: The data bits are the actual data that is transmitted
+    between transmitter and receiver. The length of data can be anywhere
+    between 5 to 9 bits. In particular, 9-bit data is the resulting
+    length without the use of parity bits. Most of the time the maximum
+    data length is 8 bits.
+
+    PARITY BIT: The parity bit can help the receiver check if any data
+    has changed during the transmission. Bits can be changed in kinds of
+    error, such as receiving overflow lost data, the reason it has
+    received lots of data but it cannot process at once. Unfinished UART
+    transmission results in data loss, use this function to enter
+    hibernation after sending, power off the receiving device, and so
+    on. After the receiver reads the data, the number of digits is
+    counted as 1 and determines whether the total is odd or even if the
+    parity bit is 0, the number of 1s in the packet is even, and if the
+    parity bit is 1, the number of 1s in the packet is odd.
+
+    END BITS: As the name suggests, it is marking the end of the data
+    packet. Typically, the stop bit occupies 1 or 2 clocks, but it is
+    also possible to set 1/2 clocks. When the stop bit ends, the data
+    line is idle and its level returns to the high position.
+
+C.  Features of UART
+
+    Unlike other hardware communication protocols, UART only requires
+    two data lines for full-duplex data transmission, such as the SPI
+    protocol, which requires at least four data lines to be connected to
+    each other. UART also does not require a clock or other time signal
+    for communication between two devices. Because of the presence of a
+    parity bit, the basic accuracy of the transmitted data is ensured
+    when used. UART has a wide range of hardware applications and a
+    variety of use scenarios. The UART protocol also has excellent power
+    performance, enabling an advance in the development of green
+    communication technology and is proven in Artix-7.
+
+    As for its disadvantages, there are mainly the following points: The
+    maximum package size transmitted is limited to 9 bits. Compared to
+    parallel transmissions, UART has a lower transmission rate. The UART
+    protocol is not a bus communication, it cannot communicate with
+    multiple devices at the same time, at a time can only be one-to-one
+    communication. Unlike the SPI protocol, a host can have multiple
+    slaves, the I2C protocol can allow multiple hosts to exist with
+    multiple slaves. The difference in baud rate between two UART
+    protocol devices that communicate with each other should not exceed
+    10\%.
+
+\paragraph{SPI}
+
+The serial Peripheral Interface is known as SPI. It is a full-duplex,
+high-speed synchronous communication bus that only uses four pins on the
+chip, saving the chip\textbackslash{}'s pins, freeing up space, and making the PCB
+layout easier. More and more chips, including AT91RM9200, are
+integrating this communication protocol because of how simple it is to
+use.The working principle is shown in Figure 1 below.
+
+\noindent\textit{[原文图片位置：图片需根据 DOCX 原文人工补齐。]}
+height="1.7104166666666667in"\}
+
+In master-slave mode, SPI operates. The slave is typically an EPROM,
+Flash, AD/DA, audio and video processing chip, or other devices, while
+the host is typically a programmable controller such as an FPGA, MCU, or
+DSP. The SCLK, CS, MOSI, and MISO lines make up the majority of them.
+SCK, SS, SDI, and SDO are examples of names that all have the same
+meaning. When there are multiple slave devices, the CS is used to select
+the slave device to be controlled.
+
+A.  Working principle of SPI
+
+    In general, the working mode of the machine parts is fixed, and the
+    host machine needs to adopt the same working mode. The Controller
+    generally refers to the control registers in the SPI device, which
+    can be configured to set the transmission mode of the SPI bus, so
+    that both sides can normally \textbackslash{}"communicate\textbackslash{}".
+
+    When the SPI is idle, the clock signal\textbackslash{}'s polarity---CPOL---shows
+    whether it is high or low. When the device is not in use, the clock
+    signal at the SCK tube\textbackslash{}'s foot is high if CPOL is set to 1. When
+    CPOL is set to 0, the opposite is accurate. SCK is zero when it is
+    not in use, as shown by CPOL=0. When SCK is in use, CPOL=1 indicates
+    that it is 1.
+
+    CPHA: clock phase, which specifies whether the SPI device starts
+    sampling data when the clock signal on the SCK pin transitions to a
+    rising edge or a falling edge. If CPHA is set to 1, the clock
+    signal\textbackslash{}'s rising and falling edges cause the SPI device to sample
+    data and transfer data, respectively. When CPHA is set to zero, the
+    opposite is accurate. At the first edge of SCK, CPHA=0 denotes that
+    the input and output data are legitimate. The input and output data
+    are valid at the second edge of SCK when CPHA=1. Of the four modes,
+    modes 0 and 3 are the most widely used, and most SPI devices support
+    both modes.
+
+B.  Structure of the SPI
+
+    By default, when we discuss SPI, we are referring to the
+    conventional 4-wire Motorola SPI protocol, which has four data lines
+    total: SCLK, MOSI, MISO, and CS. The typical 4-wire system has the
+    benefit of enabling full duplex data transfer. An SPI interface can
+    have only one host, but it can have one or more slaves. One CS is
+    required when there is just one host and one slave device, however,
+    many slave devices require several CS. MOSI and MISO are data lines.
+    MOSI sends data from the master to the slave, and MISO sends data
+    from the slave to the master. The beginning of every data line:
+    clock signal, or SCLK. The host output, slave input, host data MISO,
+    host input, slave output, CS, slave device selection, and active low
+    level are all components of the SPI rate, which is determined by the
+    clock frequency. The connection schematic was shown in figure 2
+    below.
+
+    ![6c9ec775-25e5-4335-b5af-eded3fa6d0f2](media/image2.png)\{width="3.4118055555555555in"
+    height="1.7826388888888889in"\}
+
+    There are two primary varieties of 3-wire SPI, depending on the
+    various application scenarios:
+
+    For simcom communication, some peripherals have only three SPI
+    buses, one CS, one CLK, and one MOSI/MISO, which means that the
+    input and output of data are the same data line. The SCLK, SDIO, and
+    CS wires are the only ones present. A bidirectional port for
+    half-duplex communication is the SDIO. For instance, ADI\textbackslash{}'s numerous
+    ADC chips enable bidirectional transmission. Bidirectional ports
+    should be operated by FPGAs with high resistance state Z set when
+    utilized as input.
+
+C.  Additional information
+
+    There are several special characteristics shown throughthe SPI bus,
+    not only limit to its high-frequencycommunication speed but also the
+    daisy chain connection type can be shown that SPI is a superior
+    communication protocol.
+
+<!-- -->
+
+1)  Different connection structure
+
+    SPI has two types of connections. The traditional independent slave
+    setup is the first. Each slave requires their own CS line. The
+    matching CS signal line is brought down while the other CS signal
+    lines are kept high when the host wants to talk to a certain slave.
+    The MISO pins of the unselected slave machine must be set up with
+    high-resistance output since they are on the same signal line as the
+    slave machine\textbackslash{}'s MISO pins.
+
+    Daisy chain configuration is SPI\textbackslash{}'s second connecting option. Daisy
+    chaining is the process of serially transmitting signal wires from
+    one device to the next until the data reaches the destination
+    device.
+
+    The primary drawback of the Daisy chain is that it will disconnect
+    the slave machine that has a lower priority than the device if the
+    slave machine has a single point of failure. The priority for
+    service will be lower for the slave machine that is further away
+    from the host machine. If necessary, configure the priority going
+    forward and the slave line detector.
+
+    To avoid a single point of failure causing the entire link to fail,
+    respond quickly if a slave server times out.
+
+    The SPI shift register is fully utilized in daisy-chain mode when
+    each slave copies input data to output in the subsequent clock
+    cycle. The difference comparison diagram is shown in Figure 3.
+
+    ![cb003dbb-7b59-4579-9fcc-0865b881b7d0](media/image3.png)\{width="4.177083333333333in"
+    height="1.6847222222222222in"\}
+
+2)  Transmission rate
+
+    In contrast to I2C\textbackslash{}'s normal mode of 100K, fast mode of 400K, and
+    high-speed mode of 3.4m, the SPI protocol does not have a set rate.
+    Instead, the maximum SPI clock frequency, the CPU\textbackslash{}'s capacity to
+    interpret SPI data, and the driving capacity of the output end all
+    play major roles in determining the SPI transmission rate (maximum
+    signal transmission rate should be followed by the PCB layout).
+
+\paragraph{I2C}
+
+The full name of the I2C bus can be called IIC or InterIntegrated
+Circuit. The number two in the phrase would likely be square, not two.
+The I2C is a synchronous, multicontroller and targets serial
+communication bus, developed by Philips Semiconductor in 1982. The most
+significant point of this serial communication bus is that it can
+connect with multiple devices with two lines, and the device can have
+the chance to change its characteristic with master and slave. Also,
+there are different communication modes that can be chosen by
+developers. I2C is used to connect devices like microcontrollers,
+EEPROMs, I/O interfaces, and other peripheral devices in an embedded
+system. For example, air pressure sensor connected between Arduino and
+the sensor would be a perfect application for the I2C bus. The ADC and
+DAC chip would convert the analog data to a digital i2c signal to keep
+the number constant and accurate.
+
+A.  Working principle of I2C
+
+    I2C uses two wires, SCL and SDA, also known as Serial Clock Line and
+    Serial Data Line, to connect with dozens of devices. Each device
+    owns an addressing code with 7 bits. From i2c-bus.org, it suggested
+    that the bite width with 7 can theoretically allow 128 I2C
+    addresses, but for certain reasons, there are several addresses with
+    special purposes, which are "0000000 0, 0000000 1, 0000001 X,
+    0000010 X, 0000011 X, 00001XX X, 11110XX X, 11111XX X", has been
+    noted as binary, 10-bit addresses.
+
+    The i2c simulation and concepts are based on the square wave
+    oscillation, in which electromagnetic or other interference has not
+    been considered. By using capacitors on both SCL and SDA wire could
+    reduce and filter the noise of the wave. However, the character of
+    the capacitor and the charging period would affect by the size of
+    the capacitor. It is extremely important to consider what size of
+    the capacitor to use since the clock and data line should reach the
+    logical high voltage, or the massage wouldn't be recognized. From
+    Texas Instruments' suggestion, the capacitor used for the I2C bus of
+    each device should follow the 400 pF for both Standard Mode and Fast
+    Mode and specifies 550 pF for Fast Mode Plus. The following figure 4
+    shows the waveform.
+
+    ![b9f78690-17fe-4845-b61d-3d02ed418221](media/image4.png)\{width="3.8493055555555555in"
+    height="1.1506944444444445in"\}
+
+B.  Structure of the I2C
+
+    As the I2C bus is resting, both SCL and SDA wires arekeeping HIGH.
+    When the device is planning to transfer data, SDA would switch to
+    LOW and start transferring data through the SDA wire, and the clock
+    wire would provide the clock message to each of the devices. When
+    the device is planning to stop transferring data, the SDA would
+    switch from LOW to HIGH while the SCL is in HIGH condition.
+
+    For writing data, the device first sends the stop signal to the bus,
+    reduces the condition of failing to write; then sends the rest
+    signal, the start signal. Send the address of 7 bits, and the slave
+    device would send back a feedback signal. Then start transferring
+    data with 8 bits, getting back a feedback signal from the slave as a
+    period. For ending, send a stop signal to the I2C bus, and release
+    the bus in an idle state.
+
+C.  Flaws of I2C
+
+    For several reasons, there are some disadvantages thatI2C is not
+    suggested to be applicated in long-distance communication. Though
+    there are some ways that can solve the bit flip issues, the
+    parasitic capacitance from the PCB or wire cannot be solved as a
+    physical defect. If the material of the wire is inferior, the
+    fluctuation of the parasitic capacitance and the resistance of the
+    wire will further affect the stability of the i2c bus. If the
+    resistance is too large, the master cannot parse the data of the
+    slaves, which will lead to a series of unreliable problems.
+
+\paragraph{COMPARISON}
+
+The previous chapters describe the working principles and features of
+the three protocols, and in this chapter they will be compared in a
+single direction. In terms of transmission distance, each of the three
+protocols has its own limited length, and the transmission distance of
+the UART protocol is 15m in general. However, in the design based on
+RS-485, it is possible to achieve a long-distance transmission of 100m.
+The SPI protocol is typically a short-range transmission protocol that
+can achieve transmission distances of more than 1200m in a specially
+designed environment. I2C is a short-range transmission protocol whose
+transmission distance is about 200mm to 300mm without the use of
+repeaters. As can be seen in the above transmission characteristics, the
+SPI protocol can be used under the requirements of the application
+environment that requires long-distance transmission. The UART protocol
+operates at different rates under different standards at different
+transfer rates, with a transfer rate of 20Kbps under RS-232 standards.
+Under the RS-422 standard, its transmission rate can reach 10Mbps. And
+the longer the transmission distance, the smaller the
+maximumtransmission rate. The transfer rate of the I2C protocol has
+different maximum transfer rates in different modes, and its transfer
+rate is up to 100Kbps in standard mode. In ultra-fast mode it has a
+maximum transfer rate of 5Mbps. The transmission rate of the SPI
+protocol can reach up to 50Mbps, but its maximum transmission rate is
+subject to three conditions: 1. System clock frequency 2. CPU processing
+SPI data capability 3. Maximum signal transmission rate allowed by the
+PCB. If the design requires high-speed transmission, the SPI protocol\textbackslash{}'s
+high rate is an option. If the design requires simple connections and a
+streamlined layout, I2C can do it. If the design is designed to save
+energy, then UART is the best choice, it consumes much less power than
+the other two protocols at 0.0135W.
+
+\paragraph{CONCLUSION}
+
+In this experiment, after studying the working principle, format
+description and personality characteristics of UART, we found that: The
+transmission rate of UART may be lower than some parallel protocols, and
+the transmitter and receiver are synchronized with each other without
+any medium. And use packet form in transmission. The most important
+thing is that UART data transmission only requires two data lines, and
+it is a full duplex system, although it can only be one-toone, it can
+have multiple slave machines to achieve one-to many.
+
+Then, we analyse all aspects of the SPI protocol and conclude that SPI
+as a full-duplex and high-speed communication line can simplify the
+layout and the host can change the controller by itself. The fourth line
+is a full duplex, while the third line is only half a duplex. It can be
+configured to set the main transmission mode, and the rate is constantly
+changing. Chrysanthemum link is undoubtedly a very good way of
+application, but the disadvantage is easy to cause the failure of the
+point.
+
+Finally, we reviewed the relevant literature on I2C and made a
+self-perception. I2C can connect multiple Settings with two lines, its
+characteristics can be changed, and the wave noise can be reduced to a
+certain extent. Finally, it has high requirements on wire material,
+because it will affect the stability of the bus, and too much resistance
+will affect the analysis of server data.
+
+\end{document}

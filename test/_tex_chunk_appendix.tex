@@ -1,0 +1,67 @@
+\subsection{附录 A
+项目主要文件结构}\label{ux9644ux5f55-a-ux9879ux76eeux4e3bux8981ux6587ux4ef6ux7ed3ux6784}
+
+\begin{lstlisting}
+verilog-i2c-master/
+├── README.md
+├── rtl/
+│   ├── axis_fifo.v
+│   ├── i2c_init.v
+│   ├── i2c_master.v
+│   ├── i2c_master_axil.v
+│   ├── i2c_master_wbs_8.v
+│   ├── i2c_master_wbs_16.v
+│   ├── i2c_single_reg.v
+│   ├── i2c_slave.v
+│   ├── i2c_slave_axil_master.v
+│   └── i2c_slave_wbm.v
+└── tb/
+    ├── axil.py
+    ├── axis_ep.py
+    ├── i2c.py
+    ├── wb.py
+    ├── test_i2c_master.py
+    ├── test_i2c_slave.py
+    ├── test_i2c_master_axil.py
+    ├── test_i2c_master_wbs_8.py
+    ├── test_i2c_master_wbs_16.py
+    ├── test_i2c_slave_axil_master.py
+    └── test_i2c_slave_wbm.py
+\end{lstlisting}
+
+\subsection{附录 B
+典型仿真命令}\label{ux9644ux5f55-b-ux5178ux578bux4effux771fux547dux4ee4}
+
+\begin{lstlisting}[language=bash]
+cd tb
+python test_i2c_master.py
+\end{lstlisting}
+
+测试脚本内部典型编译命令如下：
+
+\begin{lstlisting}[language=bash]
+iverilog -o test_i2c_master.vvp ../rtl/i2c_master.v test_i2c_master.v
+vvp -m myhdl test_i2c_master.vvp -lxt2
+\end{lstlisting}
+
+\subsection{附录 C
+待补充材料清单}\label{ux9644ux5f55-c-ux5f85ux8865ux5145ux6750ux6599ux6e05ux5355}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  学校模板中的封面、任务书和个人信息；
+\item
+  CNKI 已核验中文参考文献；
+\item
+  MyHDL/Icarus Verilog 仿真日志；
+\item
+  关键 I2C 波形截图；
+\item
+  FPGA 综合资源报告；
+\item
+  板级外设读写实验记录；
+\item
+  最终 DOCX 或 LaTeX 模板排版结果。
+\end{enumerate}
