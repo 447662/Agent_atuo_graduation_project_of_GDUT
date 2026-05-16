@@ -1,0 +1,23 @@
+{
+  "skill_name": "literature-translation-to-tex",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "请把文献文件夹里的那篇外文论文做成文献翻译 LaTeX，使用默认模板，输出为文献翻译.tex。",
+      "expected_output": "应先定位文献文件夹并让用户选择具体文献；确认后按固定结构生成文献/文献翻译.tex，包含文献翻译封面、译文信息、按自然段翻译正文和原文部分。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "把 文献/some-paper.pdf 翻译成学校要求的外文文献译文格式，正文按自然段翻译，每段不要太长。",
+      "expected_output": "应读取指定 PDF，按自然段且单次不超过 500 字翻译，套用 GDUT 模板，结构为外文文献译文（1）/译文信息/翻译正文/外文文献原文（1）/文献原文。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "我已经有 literature.txt，帮我生成文献翻译 tex，封面要用模板目录下的文献翻译封面.pdf，不要用论文封面.pdf。",
+      "expected_output": "应使用文本原文生成 LaTeX，明确替换 makecover 中的论文封面为文献翻译封面，并输出到文献目录下。",
+      "files": []
+    }
+  ]
+}

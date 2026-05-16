@@ -1,0 +1,36 @@
+{
+  "package": "gdut-thesis-skills",
+  "version": "1.0.0",
+  "skills": [
+    "thesis-orchestrator",
+    "project-reporter",
+    "thesis-writer",
+    "AIGC_down",
+    "thesis-md-to-docx",
+    "thesis-md-to-tex",
+    "literature-translation-to-tex",
+    "markdown-to-docx",
+    "cnki-search",
+    "cnki-advanced-search",
+    "cnki-download",
+    "cnki-export",
+    "cnki-journal-index",
+    "cnki-journal-search",
+    "cnki-journal-toc",
+    "cnki-navigate-pages",
+    "cnki-paper-detail",
+    "cnki-parse-results",
+    "gs-search",
+    "gs-advanced-search",
+    "gs-cited-by",
+    "gs-export",
+    "gs-fulltext",
+    "gs-navigate-pages"
+  ],
+  "missing": [],
+  "install": {
+    "windows": "./install.ps1",
+    "posix": "bash install.sh",
+    "manualSource": "plugins/gdut-thesis-workflow/skills"
+  }
+}

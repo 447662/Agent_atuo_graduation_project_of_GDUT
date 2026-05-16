@@ -1,0 +1,10 @@
+{
+  "name": "gdut-thesis-workflow",
+  "description": "GDUT undergraduate thesis workflow skills for Claude Code, including project reports, thesis drafts, originality revision, DOCX/TEX export, literature translation, and reference search helpers.",
+  "version": "1.0.0",
+  "author": {
+    "name": "447662"
+  },
+  "repository": "https://github.com/447662/Agent_atuo_graduation_project_of_GDUT",
+  "license": "MIT"
+}

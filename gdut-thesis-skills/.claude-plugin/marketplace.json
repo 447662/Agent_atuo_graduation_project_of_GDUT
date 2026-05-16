@@ -1,0 +1,17 @@
+{
+  "name": "gdut-thesis-skills",
+  "owner": {
+    "name": "447662"
+  },
+  "metadata": {
+    "description": "GDUT undergraduate thesis workflow skills for Claude Code: project reporting, thesis writing, AIGC/similarity revision, DOCX/TEX export, literature translation, CNKI and Google Scholar lookup.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "gdut-thesis-workflow",
+      "source": "./plugins/gdut-thesis-workflow",
+      "description": "Claude Code skills for GDUT undergraduate thesis generation and export workflows"
+    }
+  ]
+}

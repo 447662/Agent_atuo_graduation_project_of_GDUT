@@ -1,0 +1,23 @@
+{
+  "skill_name": "thesis-md-to-tex",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "请把 AIGC_down 生成的最终论文 Markdown `毕业论文_最终稿.md` 转成 LaTeX .tex。",
+      "expected_output": "应调用 thesis-md-to-tex；转换前必须先询问用户是否需要上传或指定新的 LaTeX 模板；如果用户不需要新模板，应使用默认模板 `/g:/My_code/Agent_atuo_graduation_project_of_GDUT/模板/GDUT-Undergraduate-Thesis-LaTeX-Template-main/模板.tex`；默认输出同目录同名 `.tex`，并报告源 Markdown、模板路径和需人工复查项。",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "把 `thesis_revised.md` 导出成 tex，我会提供一个新的 LaTeX 模板目录。",
+      "expected_output": "应调用 thesis-md-to-tex；应优先使用用户提供的新模板；如果用户只提供模板目录，应要求确认主入口 `.tex` 文件；不应直接使用默认模板，也不应转成 docx。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "帮我把这个目录里的最终 Markdown 都转换成 LaTeX。",
+      "expected_output": "应调用 thesis-md-to-tex；应先确认是转换目录下所有顶层 `.md` 还是只转换某一个文件；仍然必须询问是否需要上传或指定新的 LaTeX 模板；如果用户不指定模板，才使用默认模板路径；不应未经确认递归批量转换。",
+      "files": []
+    }
+  ]
+}

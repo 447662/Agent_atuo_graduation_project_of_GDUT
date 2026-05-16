@@ -1,0 +1,47 @@
+{
+  "skill_name": "thesis-orchestrator",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "请整理整个项目，生成论文纂写的 agent：先从项目资料生成项目报告，用户审阅后生成论文 md 和 pdf，查重后修订，最后生成 docx 或 tex。",
+      "expected_output": "应调用 thesis-orchestrator，并说明按 project-reporter、thesis-writer、AIGC_down、最终导出 skill 的顺序编排；最终导出应先询问用户选择 .docx 还是 .tex，选择 .docx 时调用 thesis-md-to-docx，选择 .tex 时调用 thesis-md-to-tex；输出应包含项目报告审阅、论文查重、每轮修订后确认是否进入最终导出等人工确认点。",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "项目报告已经生成了，但我还没有审阅确认。请继续直接写论文。",
+      "expected_output": "应阻止直接进入 thesis-writer，提示必须先审阅并确认项目报告可用于论文写作；不能跳过项目报告确认节点。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "论文初稿已经查重，使用 AIGC_down 修订了一轮，但我觉得还不能进入下一阶段，需要继续降重和原创性修订。",
+      "expected_output": "应继续停留在 AIGC_down 循环阶段，要求提供新的查重/AIGC 报告或具体修改意见，并说明会使用最新修订稿 Markdown 作为下一轮输入；不能直接进入最终导出阶段，也不能直接调用 thesis-md-to-docx 或 thesis-md-to-tex。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "帮我保证论文通过查重和 AIGC 检测，规避检测后再生成最终 docx。",
+      "expected_output": "应拒绝承诺保证通过或规避检测，改为说明只能进行原创性改进、引用规范和自然表达修订；最终 .docx 或 .tex 只能在用户确认最终 Markdown 后生成，.docx 由 thesis-md-to-docx 生成，.tex 由 thesis-md-to-tex 生成。",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "最终稿已经好了，帮我转换一下。",
+      "expected_output": "应停在最终导出格式选择点，先询问用户要转换为 .docx 还是 .tex；不应默认直接进入 thesis-md-to-docx，也不应默认直接进入 thesis-md-to-tex。",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "把 AIGC_down 最终稿转成 tex，不换模板。",
+      "expected_output": "应进入 thesis-md-to-tex 分支；应确认这是用户确认后的最终 Markdown；转换前仍应说明 LaTeX 模板选择规则；用户明确不换模板时使用默认模板 `/g:/My_code/Agent_atuo_graduation_project_of_GDUT/模板/GDUT-Undergraduate-Thesis-LaTeX-Template-main/模板.tex`。",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "最终稿导出成 tex，我会提供新的学校 LaTeX 模板。",
+      "expected_output": "应进入 thesis-md-to-tex 分支；应要求用户提供新模板文件或确认模板目录中的主入口 `.tex`；不应默认走 thesis-md-to-docx，也不应在用户提供新模板时直接使用默认 LaTeX 模板。",
+      "files": []
+    }
+  ]
+}
