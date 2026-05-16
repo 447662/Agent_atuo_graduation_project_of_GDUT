@@ -3,8 +3,19 @@
 
 \documentclass[12pt,a4paper]{article}
 \usepackage[UTF8]{ctex} % 中文支持
-\usepackage{times} % 使用Times New Roman字体
+% 字体选择：仅在 XeLaTeX 或 LuaLaTeX 下使用 fontspec
+\usepackage{ifxetex,ifluatex}
+\ifnum\ifxetex1\else0\fi=1
+    \usepackage{fontspec}
+\else
+    \ifnum\ifluatex1\else0\fi=1
+        \usepackage{fontspec}
+    \else
+        \usepackage{times} % 对于 pdfLaTeX 保持传统字体设置
+    \fi
+\fi
 \usepackage{geometry} % 页面设置
+\usepackage{circuitikz} % 电路图支持
 \usepackage{titlesec} % 标题格式设置
 \usepackage{fancyhdr} % 页眉页脚设置
 \usepackage{setspace} % 行距设置
@@ -22,7 +33,52 @@
 \usepackage{caption} % 图表标题
 \usepackage{subcaption} % 子图
 \usepackage{hyperref} % 超链接
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, calc, backgrounds, fit, shapes.misc, shapes.geometric} % TikZ 库
+% 引用显示为方括号内的上标（整体上标），在 hyperref 之后定义为稳健命令
+\makeatletter
+\DeclareRobustCommand{\brsupcite}[1]{\textsuperscript{[\citen{#1}]}}
+\makeatother
+\let\oldcite\cite
+\renewcommand{\cite}[1]{\brsupcite{#1}}
 \usepackage{pdfpages} % 插入PDF封面
+\usepackage{listings} % 代码块支持
+\usepackage{xcolor} % 代码高亮支持
+\usepackage{titlesec}
+\titleclass{\subsubsubsection}{straight}[\subsubsection]
+
+% 设置格式
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+% 设置编号
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+% 代码块设置
+\lstset{
+    language=Verilog,
+    basicstyle=\ttfamily\scriptsize,
+    keywordstyle=\color{blue}\bfseries,
+    stringstyle=\color{red},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    frame=single,
+    framesep=5pt,
+    breaklines=true,
+    breakatwhitespace=false,
+    tabsize=2,
+    showstringspaces=false,
+    captionpos=b,
+    abovecaptionskip=10pt,
+    belowcaptionskip=10pt
+}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
 
 % 页面设置
 \geometry{
@@ -32,13 +88,22 @@
     right=20mm
 }
 
+% 公式编号格式：按章节顺序标注，如 4-1, 2-2
+\numberwithin{equation}{section}
+\renewcommand{\theequation}{\thesection-\arabic{equation}}
+
 % 行距设置：1.5倍行距
 \onehalfspacing
 
-% 字体设置
-\setmainfont{Times New Roman}
-\setCJKmainfont{SimSun} % 宋体
-\setCJKfamilyfont{hei}{SimHei} % 黑体
+% 字体设置（为确保 \textbf 生效，显式设置粗体字体）
+% 字体设置（若使用 XeLaTeX/LuaLaTeX 则设定 fontspec 字体）
+\ifnum\ifxetex1\else0\fi=1
+    \setmainfont{Times New Roman}[BoldFont={Times New Roman}, ItalicFont={Times New Roman Italic}]
+    \setCJKmainfont[BoldFont={SimHei}]{SimSun} % 宋体，粗体使用 SimHei
+    \setCJKfamilyfont{hei}{SimHei} % 黑体
+\else
+    % pdfLaTeX: 保持默认字体设置，\textbf 在常规字体下可用
+\fi
 \newcommand{\hei}{\CJKfamily{hei}}
 
 % 字号定义
@@ -51,10 +116,41 @@
 % 表格注释命令
 \newcommand{\note}[1]{\par\vspace{0.5em}\noindent\small #1}
 
+% 表格和图像按章节编号设置
+\renewcommand{\thetable}{\thesection.\arabic{table}}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+
+% 每章开始时重置表格和图像计数器
+\makeatletter
+\@addtoreset{table}{section}
+\@addtoreset{figure}{section}
+\makeatother
+
+% 表格标题格式设置：五号黑体加粗，表序与表名之间空一格
+\captionsetup[table]{
+  font={bf, small},
+  labelfont={bf, small},
+  labelsep=space,
+  justification=centering
+}
+
+% 图像标题格式设置：五号宋体，图号与图名之间空一格
+\captionsetup[figure]{
+  font={small},
+  labelfont={bf, small},
+  labelsep=space,
+  justification=centering
+}
+
 % 标题格式设置
 \titleformat{\section}{\centering\hei\bfseries\sanhao}{\thesection}{1em}{}
 \titleformat{\subsection}{\hei\bfseries\sihao}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\hei\bfseries\xiaosi}{\thesubsubsection}{1em}{}
+\titleformat{\subsubsubsection}{\hei\bfseries\xiaosi}{\thesubsubsubsection}{1em}{}
+
+% 增加标题深度支持
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
 
 % 段落格式
 \setlength{\parindent}{2em} % 首行缩进2字符
@@ -67,8 +163,9 @@
 \renewcommand{\headrulewidth}{0pt} % 去掉页眉横线
 
 % 封面设置
-\newcommand{\makecover}{
-    \includepdf[pages=-]{论文封面.pdf}
+% 封面设置（仅当封面文件存在时插入，避免编译因找不到文件失败）
+\newcommand{\makecover}{%
+      \IfFileExists{论文封面.pdf}{\includepdf[pages=-]{论文封面.pdf}}{}%
 }
 
 % 中英文摘要环境

@@ -1,4 +1,8 @@
+Markdown to LaTeX test conversion
 Source Markdown: g:\My_code\Agent_atuo_graduation_project_of_GDUT\test\verilog-i2c-thesis_AIGC_down.md
 Default template: g:\My_code\Agent_atuo_graduation_project_of_GDUT\模板\GDUT-Undergraduate-Thesis-LaTeX-Template-main\模板.tex
-Output folder: g:\My_code\Agent_atuo_graduation_project_of_GDUT\test\latex
-Title: 基于 Verilog 的 I2C 接口组件库设计与分析
+Output TEX: g:\My_code\Agent_atuo_graduation_project_of_GDUT\test\latex\verilog-i2c-thesis_AIGC_down.tex
+Rules applied:
+- Removed numeric prefixes from LaTeX section/subsection titles.
+- Kept abstract headings centered through template abstractcn/abstracten environments.
+- Inserted \clearpage before major chapters and major front/back matter.

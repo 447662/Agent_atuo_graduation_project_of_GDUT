@@ -1,0 +1,110 @@
+% 文献翻译流程测试文件
+% 基于 GDUT 模板最小化改写，仅验证 skill 流程，不翻译整篇。
+
+\documentclass[12pt,a4paper]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{ifxetex,ifluatex}
+\ifnum\ifxetex1\else0\fi=1
+    \usepackage{fontspec}
+\else
+    \ifnum\ifluatex1\else0\fi=1
+        \usepackage{fontspec}
+    \else
+        \usepackage{times}
+    \fi
+\fi
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{cite}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{pdfpages}
+\usepackage{xcolor}
+\usepackage[titles]{tocloft}
+
+\makeatletter
+\DeclareRobustCommand{\brsupcite}[1]{\textsuperscript{[\citen{#1}]}}
+\makeatother
+\let\oldcite\cite
+\renewcommand{\cite}[1]{\brsupcite{#1}}
+
+\geometry{top=30mm,bottom=25mm,left=30mm,right=20mm}
+\onehalfspacing
+\ifnum\ifxetex1\else0\fi=1
+    \setmainfont{Times New Roman}[BoldFont={Times New Roman}, ItalicFont={Times New Roman Italic}]
+    \setCJKmainfont[BoldFont={SimHei}]{SimSun}
+    \setCJKfamilyfont{hei}{SimHei}
+\fi
+\newcommand{\hei}{\CJKfamily{hei}}
+\newcommand{\erhao}{\zihao{2}}
+\newcommand{\sanhao}{\zihao{3}}
+\newcommand{\sihao}{\zihao{4}}
+\newcommand{\xiaosi}{\zihao{-4}}
+\newcommand{\xiaowu}{\zihao{-5}}
+
+\titleformat{\section}{\centering\hei\bfseries\sanhao}{\thesection}{1em}{}
+\titleformat{\subsection}{\hei\bfseries\sihao}{\thesubsection}{1em}{}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\xiaowu\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\cftsecfont}{\hei\bfseries\xiaosi}
+\renewcommand{\cftsubsecfont}{\songti\xiaosi}
+
+% 已按 skill 规则将论文封面替换为文献翻译封面
+\newcommand{\makecover}{%
+      \IfFileExists{/g:/My_code/Agent_atuo_graduation_project_of_GDUT/模板/文献翻译封面.pdf}{\includepdf[pages=-]{/g:/My_code/Agent_atuo_graduation_project_of_GDUT/模板/文献翻译封面.pdf}}{}%
+}
+
+\begin{document}
+\makecover
+\pagenumbering{gobble}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{外文文献译文（1）}
+
+\subsection{译文信息}
+\begin{itemize}[leftmargin=2em]
+    \item 外文题名：Analysis and Comparison of UART, SPI and I2C
+    \item 中文译名：UART、SPI 与 I2C 的分析与比较
+    \item 作者：未在本次测试中成功提取，需人工复查
+    \item 来源/期刊/会议/出版社：未在本次测试中成功提取，需人工复查
+    \item 年份：未在本次测试中成功提取，需人工复查
+    \item DOI 或 URL：未在本次测试中成功提取，需人工复查
+\end{itemize}
+
+\subsection{翻译正文}
+本文件仅用于验证 skill 流程，不进行整篇翻译。按 skill 设计，此处应填入从 PDF 首页或前 1--2 页提取的原文段落之中文译文，并按自然段组织，单次处理不超过约 500 字。然而，本次输入文件在读取阶段被识别为受密码保护的 PDF，导致自动提取失败，因此这里只保留流程占位内容以验证模板整合、目录结构与封面替换步骤是否可运行。
+
+可确认的最小信息是题名 ``Analysis and Comparison of UART, SPI and I2C''，其可作为“译文信息”字段的来源。其余作者、来源、年份以及首页正文段落，均需在提供未加密 PDF 或解锁后再继续提取与翻译。
+
+\section{外文文献原文（1）}
+
+\subsection{文献原文}
+本节按 skill 规则应保留被翻译的外文原文，并维持原始段落顺序，同时对 LaTeX 特殊字符进行转义。由于本次测试输入 PDF 无法直接读取前 1--2 页文本，故未能自动填入原文，仅记录以下已知信息与失败原因。
+
+Known title: Analysis and Comparison of UART, SPI and I2C.
+
+Extraction status: the source PDF is password-protected, so the first-page or first-two-page text could not be extracted automatically in this test run.
+
+\end{document}
