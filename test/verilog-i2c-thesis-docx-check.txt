@@ -1,7 +1,0 @@
-DOCX post-check: passed
-Method: pandoc readback validation
-Output: test/verilog-i2c-thesis.docx
-Readback: test/verilog-i2c-thesis-docx-readback.md
-Template: 模板/毕业论文模板.docx
-Format reference: 模板/格式规范.docx
-Note: markdown-to-docx validate_captions.py was not available, so pandoc readback was used as fallback.

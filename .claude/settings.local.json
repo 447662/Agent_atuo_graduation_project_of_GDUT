@@ -75,13 +75,7 @@
       "Bash(xelatex -interaction=nonstopmode -halt-on-error -output-directory \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex\" \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/verilog-i2c-thesis_AIGC_down.tex\")",
       "Bash(xelatex -interaction=nonstopmode -halt-on-error \"verilog-i2c-thesis_AIGC_down.tex\")",
       "Bash(pandoc \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/verilog-i2c-thesis_AIGC_down_shifted.md\" -f markdown+tex_math_dollars -t latex --wrap=none --no-highlight -o \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/verilog-i2c-thesis_AIGC_down_body_shifted.tex\")",
-      "Bash(git status *)",
-      "Edit(/.claude/skills/thesis-md-to-tex/**)",
-      "Skill(thesis-md-to-tex)",
-      "Skill(thesis-md-to-tex:*)",
-      "Bash(rm -rf \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex\")",
-      "Bash(python \"/g/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/convert_md_to_tex.py\")",
-      "Bash(python \"g:/My_code/Agent_atuo_graduation_project_of_GDUT/test/latex/convert_md_to_tex.py\")"
+      "Bash(git status *)"
     ],
     "additionalDirectories": [
       "G:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\project-reporter",
@@ -90,8 +84,7 @@
       "G:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\test\\project-reporter\\iteration-1\\current-project-folder\\with_skill",
       "g:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills",
       "g:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\AIGC_down",
-      "g:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\thesis-md-to-docx",
-      "g:\\g\\My_code\\Agent_atuo_graduation_project_of_GDUT\\test\\latex"
+      "g:\\My_code\\Agent_atuo_graduation_project_of_GDUT\\.claude\\skills\\thesis-md-to-docx"
     ]
   }
 }
